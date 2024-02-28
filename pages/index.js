@@ -5,7 +5,7 @@ export default function Home() {
 
   useEffect(() => {
     // FastAPIサーバーのURLに変更
-    fetch('http://127.0.0.1:8000/items')
+    fetch('http://127.0.0.1:8000/hotels/')
       .then((response) => response.json())
       .then((data) => {
         setItems(data);
@@ -17,7 +17,7 @@ export default function Home() {
       <h1>アイテムリスト</h1>
       <ul>
         {items.map((item, index) => (
-          <li key={index}>{item.name}</li>
+          <li key={index}>{item.id}</li>
         ))}
       </ul>
     </div>
