@@ -2,14 +2,14 @@ import mysql from 'mysql2/promise';
 
 export async function handler(req, res) {
   const connection = await mysql.createConnection({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
   });
 
   try {
-    const [rows] = await connection.execute('SELECT * FROM revenue_prod.hotels');
+    const [rows] = await connection.execute('SELECT * FROM hotels');
     res.status(200).json(rows);
   } catch (error) {
     console.error('MySQL Error: ', error);
