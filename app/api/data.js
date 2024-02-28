@@ -10,7 +10,7 @@ export async function get(req, res) {
   });
 
   try {
-    const [rows] = await connection.execute('SELECT * FROM revenue_prod.hotels');
+    const [rows] = await connection.execute('SELECT * FROM hotels');
     res.status(200).json(rows);
   } catch (error) {
     console.error('MySQL Error: ', error);
