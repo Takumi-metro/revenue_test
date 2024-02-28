@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const [names, setNames] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch('/api/data')
+    // FastAPIサーバーのURLに変更
+    fetch('http://127.0.0.1:8000/items')
       .then((response) => response.json())
       .then((data) => {
-        const extractedNames = data.map(item => item.ja_name);
-        setNames(extractedNames);
+        setItems(data);
       });
   }, []);
 
   return (
     <div>
-      <h1>データベースのデータ</h1>
+      <h1>アイテムリスト</h1>
       <ul>
-        {names.map((name, index) => (
-          <li key={index}>{name}</li>
+        {items.map((item, index) => (
+          <li key={index}>{item.name}</li>
         ))}
       </ul>
     </div>
