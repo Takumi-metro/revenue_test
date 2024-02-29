@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css'; // ag-Gridの基本スタイル
+import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css'; // ag-Gridのダークテーマ
 
 export default function Home() {
   const [bookingSummary, setBookingSummary] = useState([]);
@@ -10,20 +13,22 @@ export default function Home() {
       .catch(error => console.error('Error fetching booking summary:', error));
   }, []);
 
+  // ag-Gridの列定義
+  const columnDefs = [
+    { headerName: "Booking Date", field: "booking_date" },
+    { headerName: "Group Date", field: "group_date" },
+    { headerName: "Rooms Count", field: "rooms_count" },
+    { headerName: "New Added", field: "new_added" },
+    { headerName: "New Cancelled", field: "new_cancelled" },
+    { headerName: "Total Guest Rooms", field: "total_guest_rooms" }
+  ];
+
   return (
-    <div>
-      <h1>Booking Summary</h1>
-      {bookingSummary.length > 0 ? (
-        <ul>
-          {bookingSummary.map((item, index) => (
-            <li key={index}>
-              Booking Date: {item.booking_date}, Group Date: {item.group_date}, Rooms Count: {item.rooms_count}, New Added: {item.new_added}, New Cancelled: {item.new_cancelled}, Total Guest Rooms: {item.total_guest_rooms}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No booking summary data available.</p>
-      )}
+    <div className="ag-theme-alpine-dark" style={{ height: 600, width: '100%' }}>
+      <AgGridReact
+        rowData={bookingSummary}
+        columnDefs={columnDefs}
+      />
     </div>
   );
 }
