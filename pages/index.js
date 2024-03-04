@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-community/dist/styles/ag-grid.css'; // ag-Gridの基本スタイル
+
+import 'node_modules/ag-grid-community/dist/styles/ag-grid.css'; // ag-Gridの基本スタイル
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css'; // ag-Gridのダークテーマ
 
 export default function Home() {
