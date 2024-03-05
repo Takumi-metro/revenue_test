@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-
-import 'node_modules/ag-grid-community/dist/styles/ag-grid.css'; // ag-Gridの基本スタイル
-import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css'; // ag-Gridのダークテーマ
+import 'ag-grid-community/styles/ag-grid.css'; // ag-Gridの基本スタイル
+import 'ag-grid-community/styles/ag-theme-alpine.css'; // ag-Gridのダークテーマ
 
 export default function Home() {
   const [bookingSummary, setBookingSummary] = useState([]);
