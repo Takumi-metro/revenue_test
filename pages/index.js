@@ -9,18 +9,25 @@ export default function Home() {
     fetch('http://localhost:8000/booking_summary/')
       .then(response => response.json())
       .then(data => {
-        if (data && Array.isArray(data)) { // dataが配列であることを確認
-          //const slicedData = data.slice(0, 100);
-          //const bookingDates =  slicedData.map(item => item.booking_date);
-          //const guestRooms = slicedData.map(item => item.rooms_count);
-          const bookingDates = data.map(item => item.booking_date);
-          const guestRooms = data.map(item => item.rooms_count);
+        if (data && Array.isArray(data)) {
+          // 2024年3月8日の宿泊に対する予約データのみをフィルタリング
+          const filteredData = data.filter(item => item.booking_date === '2024-03-08');
+          // group_dateを基準に予約データをソート
+          const sortedData = filteredData.sort((a, b) => new Date(a.group_date) - new Date(b.group_date));
+          const groupDates = sortedData.map(item => item.group_date);
+          // 累積和を計算
+          const cumulativeRoomsCounts = sortedData.reduce((acc, curr) => {
+            const lastSum = acc.length > 0 ? acc[acc.length - 1] : 0;
+            acc.push(lastSum + curr.rooms_count);
+            return acc;
+          }, []);
+
           setBookingData({
-            labels: bookingDates,
+            labels: groupDates,
             datasets: [
               {
-                label: 'Rooms count',
-                data: guestRooms,
+                label: 'Cumulative Rooms Booked',
+                data: cumulativeRoomsCounts,
                 fill: false,
                 borderColor: 'rgba(75,192,192,1)',
                 tension: 0.1
