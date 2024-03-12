@@ -3,7 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css'; // ag-Gridの基本スタイル
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // ag-Gridのダークテーマ
 
-export default function Home() {
+export default function BookingSummaryTable() {
   const [bookingSummary, setBookingSummary] = useState([]);
 
   useEffect(() => {
