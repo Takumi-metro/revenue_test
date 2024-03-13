@@ -13,12 +13,16 @@ export default function BookingCurveChart() {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {bookingData ? (
-        <div>
-          <h2>Booking Curve</h2>
-          <Line data={bookingData} />
-        </div>
+        ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(dayOfWeek => (
+          bookingData[dayOfWeek] && (
+            <div key={dayOfWeek} style={{ width: '50%', padding: '10px', boxSizing: 'border-box' }}>
+              <h2>Booking Curve ({dayOfWeek})</h2>
+              <Line data={bookingData[dayOfWeek]} />
+            </div>
+          )
+        ))
       ) : (
         <p>Loading booking curve data...</p>
       )}
