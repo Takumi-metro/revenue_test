@@ -7,7 +7,7 @@ export default function BookingSummaryTable() {
   const [bookingSummary, setBookingSummary] = useState([]);
 
   useEffect(() => {
-    fetch('process.env.REACT_BOOKING_SUMMARY_DATA_URL')
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/booking_summary/`)
       .then(response => response.json())
       .then(data => setBookingSummary(data))
       .catch(error => console.error('Error fetching booking summary:', error));
