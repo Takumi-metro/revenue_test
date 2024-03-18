@@ -6,7 +6,7 @@ export default function BookingCurveChart() {
   const [bookingData, setBookingData] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/booking_curve_data/')
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/booking_curve_data/`)
       .then(response => response.json())
       .then(data => setBookingData(data))
       .catch(error => console.error('Error fetching booking curve data:', error));

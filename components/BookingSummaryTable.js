@@ -8,8 +8,16 @@ export default function BookingSummaryTable() {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/booking_summary/`)
-      .then(response => response.json())
-      .then(data => setBookingSummary(data))
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Booking summary data:', data); // デバッグ用のログ
+        setBookingSummary(data);
+      })
       .catch(error => console.error('Error fetching booking summary:', error));
   }, []);
 
