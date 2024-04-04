@@ -1,6 +1,29 @@
-version: '3'
+version: '3.12'
+
 services:
-  web:
-    build: .
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - NEXT_PUBLIC_API_BASE_URL=http://backend:8001
     ports:
-      - "5000:5000"
+      - "3001:3001"
+    depends_on:
+      - backend
+    networks:
+      - shared-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8001:5000"
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    name: backend_shared-network
+    external: true

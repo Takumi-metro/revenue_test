@@ -10,7 +10,7 @@
 /coverage
 
 # next.js
-/.next/
+frontend/.next/
 /out/
 
 # production
@@ -37,4 +37,20 @@ next-env.d.ts
 
 # Environment variables
 .env
+
+# 依存関係
+node_modules/
+
+# ビルド生成物
+/dist
+
+# 開発ツールの設定
+.vscode/
+.idea/
+
+# 環境設定ファイル
+.env
+
+# ログファイル
+*.log
 
